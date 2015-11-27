@@ -4,8 +4,8 @@ def run_script(file)
   system "ruby interactive.rb < #{file} &> /dev/null"
   $?.success?
 end
-BrokerCmd = "ruby ./broker.rb &> /dev/null"
-ClientCmd = "ruby ./client.rb &> /dev/null"
+BrokerCmd = "ruby ./broker.rb"
+ClientCmd = "ruby ./client.rb"
 
 class CalcTests < Test::Unit::TestCase
   def setup
