@@ -5,8 +5,9 @@ before_install:
   - sudo apt-get install libboost-dev libboost-test-dev libboost-program-options-dev libevent-dev automake libtool flex bison pkg-config g++ libssl-dev
   - wget http://www.us.apache.org/dist/thrift/0.9.2/thrift-0.9.2.tar.gz
   - tar xfz thrift-0.9.2.tar.gz
-  - cd thrift-0.9.2 && ./configure --without-ruby && sudo make install
+  - cd thrift-0.9.2 && ./configure --without-ruby && sudo make install && cd -
   - gem install thrift test-unit
+  - ls 
   - thrift --gen rb pubsub.thrift
 rvm:
   - 2.2.3
