@@ -2,6 +2,9 @@ language: ruby
 sudo: false
   - gem install thrift
   - thrift --gen rb pubsub.thrift
+rvm:
+  - 2.2.3
 
 script:
+  - ls
   - ruby test.rb
