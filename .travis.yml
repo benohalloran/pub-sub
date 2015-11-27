@@ -1,6 +1,7 @@
 language: ruby
 sudo: false
-  - gem install thrift
+before_install:
+  - gem install thrift test-unit
   - thrift --gen rb pubsub.thrift
 rvm:
   - 2.2.3
