@@ -33,12 +33,12 @@ class DataManager
       @data[topic].each do |subscriber|
         puts "Broker processing #{msg} to #{subscriber}"
         begin
-        client_transport = Thrift::BufferedTransport.new(Thrift::Socket.new(subscriber[:host], subscriber[:port]))
-        client = Concord::PubSub::PubSubConsumer::Client.new(
+          client_transport = Thrift::BufferedTransport.new(Thrift::Socket.new(subscriber[:host], subscriber[:port]))
+          client = Concord::PubSub::PubSubConsumer::Client.new(
             Thrift::BinaryProtocol.new(client_transport))
-            client_transport.open
-        client.receive topic, msg
-        client_transport.close
+          client_transport.open
+          client.receive topic, msg
+          client_transport.close
 
           puts "Broker Sent #{msg} to #{subscriber}"
         rescue Exception => e
@@ -48,6 +48,7 @@ class DataManager
     end
   end
 
+  # Extra debug method that dumps out the current mapping of consumers and topics
   def info
     puts 'Current subscription map'
     puts @data
