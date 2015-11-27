@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH.push('../gen-rb')
+$LOAD_PATH.push('./gen-rb')
 require 'thrift'
 require 'pub_sub_consumer'
 require 'pub_sub_broker'

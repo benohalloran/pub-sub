@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # The PubSubBroker service
-$LOAD_PATH.push('../gen-rb')
+$LOAD_PATH.push('./gen-rb')
 
 require 'thrift'
 require 'pub_sub_broker'
