@@ -5,7 +5,7 @@ def run_script(file)
   $?.success?
 end
 BrokerCmd = "ruby ./broker.rb"
-ClientCmd = "ruby ./client.rb"
+ClientCmd = "ruby ./consumer.rb"
 
 class CalcTests < Test::Unit::TestCase
   def setup

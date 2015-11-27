@@ -31,7 +31,6 @@ class DataManager
       puts "no subscribers for #{topic}. Discarding message #{msg}"
     else
       @data[topic].each do |subscriber|
-        puts "Broker processing #{msg} to #{subscriber}"
         begin
           client_transport = Thrift::BufferedTransport.new(Thrift::Socket.new(subscriber[:host], subscriber[:port]))
           client = Concord::PubSub::PubSubConsumer::Client.new(
@@ -40,7 +39,7 @@ class DataManager
           client.receive topic, msg
           client_transport.close
 
-          puts "Broker Sent #{msg} to #{subscriber}"
+          puts "Broker sent #{msg} to #{subscriber}"
         rescue Exception => e
           STDERR.puts "Error writing to client #{e}"
         end

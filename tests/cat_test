@@ -1,2 +1,5 @@
 subscribe cats
 publish cats meow
+info
+unsubscribe cats
+info

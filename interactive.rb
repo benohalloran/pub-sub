@@ -19,20 +19,20 @@ broker = Concord::PubSub::PubSubBroker::Client.new(protocol)
 puts "Broker is #{broker_host}:#{broker_port}"
 puts "Client is #{client_host}:#{client_port}"
 
-transport.open
 STDIN.each_line do |line|
+  transport.open
+  puts line unless STDIN.tty?
   case line
-  when /subscribe\s(?<topic>\w*)/
-    broker.subscribe $LAST_MATCH_INFO[:topic], client_host, client_port
-  when /unsubscribe\s(?<topic>\w*)/
-    broker.unsubscribe $LAST_MATCH_INFO[:topic], client_host, client_port
-  when /publish\s(?<topic>\w*)\s(?<msg>.*)/
-    puts "topic=#{$LAST_MATCH_INFO[:topic]} msg = #{$LAST_MATCH_INFO[:msg]}"
-    broker.publish $LAST_MATCH_INFO[:topic], $LAST_MATCH_INFO[:msg]
-  when /info.*/
+  when /\Asubscribe\s(?<topic>.*)$/
+    broker.subscribe $~[:topic], client_host, client_port
+  when /\Aunsubscribe\s(?<topic>.*)$/
+    broker.unsubscribe $~[:topic], client_host, client_port
+  when /\Apublish\s(?<topic>\w*)\s(?<msg>.*)$/
+    broker.publish $~[:topic], $~[:msg]
+  when /\Ainfo.*$/
     broker.info
   else
     STDERR.puts "Invalid input #{line}"
   end
+  transport.close
 end
-transport.close
