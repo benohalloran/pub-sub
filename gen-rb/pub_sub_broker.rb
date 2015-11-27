@@ -55,6 +55,20 @@ module Concord
           return
         end
 
+        def info()
+          send_info()
+          recv_info()
+        end
+
+        def send_info()
+          send_message('info', Info_args)
+        end
+
+        def recv_info()
+          result = receive_message(Info_result)
+          return
+        end
+
       end
 
       class Processor
@@ -79,6 +93,13 @@ module Concord
           result = Publish_result.new()
           @handler.publish(args.topic, args.message)
           write_result(result, oprot, 'publish', seqid)
+        end
+
+        def process_info(seqid, iprot, oprot)
+          args = read_args(iprot, Info_args)
+          result = Info_result.new()
+          @handler.info()
+          write_result(result, oprot, 'info', seqid)
         end
 
       end
@@ -174,6 +195,36 @@ module Concord
       end
 
       class Publish_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+
+        FIELDS = {
+
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class Info_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+
+        FIELDS = {
+
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class Info_result
         include ::Thrift::Struct, ::Thrift::Struct_Union
 
         FIELDS = {

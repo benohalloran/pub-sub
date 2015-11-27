@@ -11,6 +11,8 @@ service PubSubBroker {
 
   // publish a message to a topic
   void publish(1:string topic, 2:string message);
+  //Debug method: dump the current subscription list
+  void info();
 }
 
 service PubSubConsumer {
